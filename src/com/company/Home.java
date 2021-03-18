@@ -1,9 +1,14 @@
 package com.company;
 
+import com.company.panel.Panels;
+
 import javax.swing.*;
+import javax.swing.text.IconView;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
 
 public class Home extends JFrame implements ActionListener {
     JButton new_book, issue_book, return_book, logout;
@@ -15,6 +20,8 @@ public class Home extends JFrame implements ActionListener {
     Home(JFrame frame, JPanel home_panel) {
         this.frame = frame;
         this.home_panel = home_panel;
+
+        home_panel.setBackground(Color.BLUE);
 
         add_icon = new ImageIcon("src/com/company/images/add_book.png");
         issue_icon = new ImageIcon("src/com/company/images/issue.png");
@@ -29,7 +36,12 @@ public class Home extends JFrame implements ActionListener {
         create_admin = new JButton(creat_admin_icon);
 
         home_panel.setLayout(null);
-        home_panel.setSize(1280,700);
+        home_panel.setSize(Main.width/2,Main.height);
+
+        Panels.add_book_panel.setBackground(Color.RED);
+        Panels.add_book_panel.setSize(Main.width/2, Main.height);
+        Panels.add_book_panel.setLayout(null);
+
 
         setBounds();
         addToFrame();
@@ -47,6 +59,12 @@ public class Home extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == new_book){
+            Panels.add_book_panel = new JPanel();
+
+            Panels.add_book_panel.setBackground(Color.RED);
+            Panels.add_book_panel.setSize(Main.width/2, Main.height);
+            Panels.add_book_panel.setLayout(null);
+            frame.setLayout(new GridLayout(1,2));
 
         }
         else if(e.getSource() == issue_book){
@@ -59,15 +77,19 @@ public class Home extends JFrame implements ActionListener {
 
         }
         else if(e.getSource() == logout){
-
+            int option = JOptionPane.showConfirmDialog(this,"Are you sure you wish to logout?","Warning",JOptionPane.WARNING_MESSAGE,JOptionPane.YES_NO_CANCEL_OPTION,new ImageIcon("src/com/company/images/warning.png"));
+            if(option == JOptionPane.OK_OPTION){
+                home_panel.setVisible(false);
+                Main.admin_panel.setVisible(true);
+            }
         }
     }
     private void setBounds() {
-        new_book.setBounds(600,20,170,170);
-        issue_book.setBounds(780,20,170,170);
-        return_book.setBounds(600,200,170,170);
-        create_admin.setBounds(780,200,170,170);
-        logout.setBounds(600,380,170,170);
+        new_book.setBounds(40,40,170,170);
+        issue_book.setBounds(220,40,170,170);
+        return_book.setBounds(40,220,170,170);
+        create_admin.setBounds(220,220,170,170);
+        logout.setBounds(40,400,170,170);
     }
     private void addToFrame() {
         home_panel.add(new_book);
@@ -75,6 +97,9 @@ public class Home extends JFrame implements ActionListener {
         home_panel.add(return_book);
         home_panel.add(logout);
         home_panel.add(create_admin);
+
+        frame.setLayout(new GridLayout(1,2));
         frame.add(home_panel);
+        frame.add(Panels.add_book_panel);
     }
 }

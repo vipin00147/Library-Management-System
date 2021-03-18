@@ -11,8 +11,11 @@ public class Main extends JFrame implements ActionListener {
     JPasswordField passwordField;
     JButton loginButton, forgotButton;
     ImageIcon imageIcon;
+    public static int width,height;
     public static JFrame frame = new JFrame("Login");
     public static JPanel admin_panel, home_panel;
+    public static JPanel add_book,issue_book,
+                    return_book, create_admin;
 
     public void setComponents(){
         admin_panel = new JPanel();
@@ -52,12 +55,16 @@ public class Main extends JFrame implements ActionListener {
         admin_panel.add(label4);
         frame.add(admin_panel);
 
+        Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
+        width = (int) size.getWidth();
+        height = (int) size.getHeight();
+
         frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
         frame.setResizable(true);
         frame.setLayout(null);
         admin_panel.setLayout(null);
-        admin_panel.setSize(1280,700);
-        frame.setSize(1280,700);
+        admin_panel.setSize(width,height);
+        frame.setSize(width,height);
         frame.setVisible(true);
     }
 
