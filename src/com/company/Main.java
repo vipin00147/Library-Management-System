@@ -115,7 +115,7 @@ public class Main extends JFrame implements ActionListener {
             if(flag){
                 admin_panel.setVisible(false);
                 home_panel.setVisible(true);
-                Home home = new Home(frame, home_panel);
+                new Home(frame, home_panel);
 
             }
             else {
